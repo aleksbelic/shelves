@@ -95,3 +95,38 @@ LEFT JOIN
 GROUP BY
   b.id, b.title, b.isbn, b.edition, b.publish_year,
   p.name, l.name, rs.status;
+
+CREATE POLICY anon_select_book ON public.book
+  FOR SELECT
+  TO anon
+  USING (true);
+
+CREATE POLICY anon_select_publisher ON public.publisher
+  FOR SELECT
+  TO anon
+  USING (true);
+
+CREATE POLICY anon_select_language ON public.language
+  FOR SELECT
+  TO anon
+  USING (true);
+
+CREATE POLICY anon_select_book_author ON public.book_author
+  FOR SELECT
+  TO anon
+  USING (true);
+
+CREATE POLICY anon_select_author ON public.author
+  FOR SELECT
+  TO anon
+  USING (true);
+
+CREATE POLICY anon_select_book_reading_status ON public.book_reading_status
+  FOR SELECT
+  TO anon
+  USING (true);
+
+CREATE POLICY anon_select_reading_status ON public.reading_status
+  FOR SELECT
+  TO anon
+  USING (true);
