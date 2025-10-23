@@ -14,6 +14,7 @@
 				'Title',
 				'Author',
 				'Publisher',
+				'Category',
 				'ISBN',
 				{ id: 'publish-year', name: 'Publish year' },
 				'Edition',
@@ -31,11 +32,12 @@
 				book.title,
 				(book.authors || []).join(', '),
 				book.publisher_name,
+				(book.categories || []).join(', '),
 				book.isbn,
 				book.publish_year,
 				book.edition,
 				book.language_name,
-				book.reading_status
+				book.reading_status_name
 			]),
 			style: {
 				th: {
