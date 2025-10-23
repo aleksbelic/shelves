@@ -32,6 +32,7 @@
 		"vite": "^7.1.7"
 	},
 	"dependencies": {
-		"@supabase/supabase-js": "^2.75.1"
+		"@supabase/supabase-js": "^2.75.1",
+		"gridjs": "^6.2.0"
 	}
 }
