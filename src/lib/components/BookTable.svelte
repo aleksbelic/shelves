@@ -1,51 +1,43 @@
-<script>
-	import { onMount } from 'svelte';
-	import { Grid, h } from 'gridjs';
-	import 'gridjs/dist/theme/mermaid.css';
+<script lang="ts">
+	import {
+		Table,
+		TableBody,
+		TableBodyCell,
+		TableBodyRow,
+		TableHead,
+		TableHeadCell
+	} from 'flowbite-svelte';
 
-	export let books = [];
+	export let books: any[] = [] as any[];
 
-	let bookTableWrapper;
-
-	onMount(() => {
-		new Grid({
-			columns: [
-				'#',
-				'Title',
-				'Author',
-				'Publisher',
-				'Category',
-				'ISBN',
-				{ id: 'publish-year', name: 'Publish year' },
-				'Edition',
-				'Language',
-				{ id: 'reading-status', name: 'Reading status' }
-			],
-			search: true,
-			sort: true,
-			pagination: {
-				enabled: true,
-				limit: 15
-			},
-			data: (books || []).map((book, index) => [
-				index + 1,
-				book.title,
-				(book.authors || []).join(', '),
-				book.publisher_name,
-				(book.categories || []).join(', '),
-				book.isbn,
-				book.publish_year,
-				book.edition,
-				book.language_name,
-				book.reading_status_name
-			]),
-			style: {
-				th: {
-					'text-align': 'center'
-				}
-			}
-		}).render(bookTableWrapper);
-	});
+	// TODO: use only {items} object and not books directly: https://flowbite-svelte.com/docs/components/table#table-from-data
 </script>
 
-<div bind:this={bookTableWrapper}></div>
+<Table striped={true} hoverable={true}>
+	<TableHead>
+		<TableHeadCell>#</TableHeadCell>
+		<TableHeadCell>Title</TableHeadCell>
+		<TableHeadCell>Author</TableHeadCell>
+		<TableHeadCell>Publisher</TableHeadCell>
+		<TableHeadCell>ISBN</TableHeadCell>
+		<TableHeadCell>Publish year</TableHeadCell>
+		<TableHeadCell>Edition</TableHeadCell>
+		<TableHeadCell>Language</TableHeadCell>
+		<TableHeadCell>Reading status</TableHeadCell>
+	</TableHead>
+	<TableBody>
+		{#each books as book, index}
+			<TableBodyRow>
+				<TableBodyCell>{index + 1}</TableBodyCell>
+				<TableBodyCell>{book.title}</TableBodyCell>
+				<TableBodyCell>{book.authors.join(', ')}</TableBodyCell>
+				<TableBodyCell>{book.publisher_name}</TableBodyCell>
+				<TableBodyCell>{book.isbn}</TableBodyCell>
+				<TableBodyCell>{book.publish_year}</TableBodyCell>
+				<TableBodyCell>{book.edition}</TableBodyCell>
+				<TableBodyCell>{book.language_name}</TableBodyCell>
+				<TableBodyCell>{book.reading_status_name}</TableBodyCell>
+			</TableBodyRow>
+		{/each}
+	</TableBody>
+</Table>

@@ -1,9 +1,7 @@
-<script>
+<script lang="ts">
 	import BookTable from '$lib/components/BookTable.svelte';
-	export let data;
+	import type { Book } from '$lib/types/Book';
+	export let data: { books: Book[] };
 </script>
 
-<h1 data-testid="title">&#128218; Shelves</h1>
-
 <BookTable books={data.books} />
-
