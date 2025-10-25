@@ -7,9 +7,3 @@
 
 <BookTable books={data.books} />
 
-<style>
-	:global(body) {
-		font-family: Arial, sans-serif;
-		margin: 20px;
-	}
-</style>
