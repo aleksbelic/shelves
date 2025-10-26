@@ -1,34 +1,18 @@
 <script lang="ts">
+	import { P } from 'flowbite-svelte';
 	import {
-		Badge,
 		Table,
 		TableBody,
 		TableBodyCell,
 		TableBodyRow,
 		TableHead,
-		TableHeadCell,
-		P
-	} from 'flowbite-svelte';
+		TableHeadCell
+	} from '@flowbite-svelte-plugins/datatable';
 
 	export let books: any[] = [] as any[];
-
-	function getBadgeColorForGenre(genre: string) {
-		switch (genre.toLowerCase()) {
-			case 'scy-fi':
-				return 'orange';
-			case 'horror':
-				return 'teal';
-			case 'thriller':
-				return 'purple';
-			case 'romance':
-				return 'pink';
-			default:
-				return 'gray';
-		}
-	}
 </script>
 
-<Table striped={true} hoverable={true}>
+<Table dataTableOptions={{ searchable: true, sortable: true, perPageSelect: [10, 20, 30] }}>
 	<TableHead>
 		<TableHeadCell>#</TableHeadCell>
 		<TableHeadCell>Title</TableHeadCell>
@@ -43,19 +27,13 @@
 	</TableHead>
 	<TableBody>
 		{#each books as book, index}
-			<TableBodyRow>
+			<TableBodyRow
+				class="border-b bg-white last:border-b-0 odd:bg-white even:bg-gray-50 hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:odd:bg-gray-800 dark:even:bg-gray-700 dark:hover:bg-gray-600"
+			>
 				<TableBodyCell>{index + 1}</TableBodyCell>
 				<TableBodyCell><P weight="medium">{book.title}</P></TableBodyCell>
 				<TableBodyCell>{book.authors.join(', ')}</TableBodyCell>
-				<TableBodyCell>
-					{#each book.categories as category}
-						{#if category !== null}
-							<Badge rounded class="ms-2 font-semibold" color={getBadgeColorForGenre(category)}
-								>{category}</Badge
-							>
-						{/if}
-					{/each}
-				</TableBodyCell>
+				<TableBodyCell>{book.categories.join(', ')}</TableBodyCell>
 				<TableBodyCell>{book.publisher_name}</TableBodyCell>
 				<TableBodyCell>{book.isbn}</TableBodyCell>
 				<TableBodyCell>{book.publish_year}</TableBodyCell>

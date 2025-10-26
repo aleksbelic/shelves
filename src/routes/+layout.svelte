@@ -11,7 +11,7 @@
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
-<div class="m-4 flex justify-end-safe">
+<div class="flex justify-end-safe">
 	<DarkMode class="border" />
 </div>
 
