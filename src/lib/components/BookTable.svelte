@@ -8,6 +8,7 @@
 		TableHead,
 		TableHeadCell
 	} from '@flowbite-svelte-plugins/datatable';
+	import { formatISBN13 } from '$lib/utils/isbn';
 
 	export let books: any[] = [] as any[];
 </script>
@@ -35,7 +36,7 @@
 				<TableBodyCell>{book.authors.join(', ')}</TableBodyCell>
 				<TableBodyCell>{book.categories.join(', ')}</TableBodyCell>
 				<TableBodyCell>{book.publisher_name}</TableBodyCell>
-				<TableBodyCell>{book.isbn}</TableBodyCell>
+				<TableBodyCell>{formatISBN13(book.isbn)}</TableBodyCell>
 				<TableBodyCell>{book.publish_year}</TableBodyCell>
 				<TableBodyCell>{book.edition}</TableBodyCell>
 				<TableBodyCell>{book.language_name}</TableBodyCell>
