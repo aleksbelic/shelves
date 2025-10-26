@@ -9,8 +9,9 @@
 		TableHeadCell
 	} from '@flowbite-svelte-plugins/datatable';
 	import { formatISBN13 } from '$lib/utils/isbn';
+	import type { Book } from '$lib/types/Book';
 
-	export let books: any[] = [] as any[];
+	export let books: Book[] = [];
 </script>
 
 <Table dataTableOptions={{ searchable: true, sortable: true, perPageSelect: [10, 20, 30] }}>
@@ -18,7 +19,7 @@
 		<TableHeadCell>#</TableHeadCell>
 		<TableHeadCell>Title</TableHeadCell>
 		<TableHeadCell>Author</TableHeadCell>
-		<TableHeadCell>Category</TableHeadCell>
+		<TableHeadCell>Genre</TableHeadCell>
 		<TableHeadCell>Publisher</TableHeadCell>
 		<TableHeadCell>ISBN</TableHeadCell>
 		<TableHeadCell>Publish year</TableHeadCell>
@@ -33,14 +34,14 @@
 			>
 				<TableBodyCell>{index + 1}</TableBodyCell>
 				<TableBodyCell><P weight="medium">{book.title}</P></TableBodyCell>
-				<TableBodyCell>{book.authors.join(', ')}</TableBodyCell>
-				<TableBodyCell>{book.categories.join(', ')}</TableBodyCell>
-				<TableBodyCell>{book.publisher_name}</TableBodyCell>
+				<TableBodyCell>{book.author.join(', ')}</TableBodyCell>
+				<TableBodyCell>{(book.genre ?? []).join(', ')}</TableBodyCell>
+				<TableBodyCell>{book.publisherName}</TableBodyCell>
 				<TableBodyCell>{formatISBN13(book.isbn)}</TableBodyCell>
-				<TableBodyCell>{book.publish_year}</TableBodyCell>
+				<TableBodyCell>{book.publishYear}</TableBodyCell>
 				<TableBodyCell>{book.edition}</TableBodyCell>
-				<TableBodyCell>{book.language_name}</TableBodyCell>
-				<TableBodyCell>{book.reading_status_name}</TableBodyCell>
+				<TableBodyCell>{book.languageName}</TableBodyCell>
+				<TableBodyCell>{book.readingStatusName}</TableBodyCell>
 			</TableBodyRow>
 		{/each}
 	</TableBody>
