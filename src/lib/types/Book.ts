@@ -3,10 +3,10 @@ export type Book = {
 	title: string;
 	author: string[];
 	genre?: string[];
-	publisherName: string;
+	publisher: string;
 	isbn: string;
 	publishYear?: number;
 	edition?: string;
-	languageName: string;
-	readingStatusName?: string;
+	language: string;
+	readingStatus?: string;
 };

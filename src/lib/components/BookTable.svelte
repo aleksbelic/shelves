@@ -36,12 +36,12 @@
 				<TableBodyCell><P weight="medium">{book.title}</P></TableBodyCell>
 				<TableBodyCell>{book.author.join(', ')}</TableBodyCell>
 				<TableBodyCell>{(book.genre ?? []).join(', ')}</TableBodyCell>
-				<TableBodyCell>{book.publisherName}</TableBodyCell>
+				<TableBodyCell>{book.publisher}</TableBodyCell>
 				<TableBodyCell>{formatISBN13(book.isbn)}</TableBodyCell>
 				<TableBodyCell>{book.publishYear}</TableBodyCell>
 				<TableBodyCell>{book.edition}</TableBodyCell>
-				<TableBodyCell>{book.languageName}</TableBodyCell>
-				<TableBodyCell>{book.readingStatusName}</TableBodyCell>
+				<TableBodyCell>{book.language}</TableBodyCell>
+				<TableBodyCell>{book.readingStatus}</TableBodyCell>
 			</TableBodyRow>
 		{/each}
 	</TableBody>

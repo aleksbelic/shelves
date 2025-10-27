@@ -9,11 +9,11 @@ export async function load() {
 		title: book.title,
 		author: book.author ?? [],
 		genre: book.genre ?? [],
-		publisherName: book.publisher_name ?? '',
+		publisher: book.publisher_name ?? '',
 		isbn: book.isbn ?? '',
 		publishYear: book.publish_year ?? null,
 		edition: book.edition ?? null,
-		languageName: book.language_name ?? '',
+		language: book.language_name ?? '',
 		readingStatus: book.reading_status_name ?? null
 	}));
 
