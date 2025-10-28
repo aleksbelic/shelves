@@ -18,6 +18,7 @@
 	"devDependencies": {
 		"@eslint/compat": "^1.4.0",
 		"@eslint/js": "^9.36.0",
+		"@flowbite-svelte-plugins/chart": "^0.2.4",
 		"@flowbite-svelte-plugins/datatable": "^0.4.1",
 		"@playwright/test": "^1.55.1",
 		"@sveltejs/adapter-auto": "^6.1.0",
@@ -30,6 +31,7 @@
 		"eslint-plugin-svelte": "^3.12.4",
 		"flowbite": "^3.1.2",
 		"flowbite-svelte": "^1.19.0",
+		"flowbite-svelte-icons": "^3.0.0",
 		"globals": "^16.4.0",
 		"prettier": "^3.6.2",
 		"prettier-plugin-svelte": "^3.4.0",

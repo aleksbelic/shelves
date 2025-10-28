@@ -38,9 +38,12 @@
 	}
 }
 
-/* Svelte DataTables - Flowbite */
+/* DataTables plugin by Flowbite */
 @source "../node_modules/simple-datatables/dist";
 @source "../node_modules/@flowbite-svelte-plugins/datatable/dist";
+
+/* Chart plugin by Flowbite */
+@source "../node_modules/@flowbite-svelte-plugins/chart/dist";
 
 .datatable-pagination .datatable-active a,
 .datatable-pagination .datatable-active a:focus,
