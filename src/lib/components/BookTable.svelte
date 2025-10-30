@@ -45,3 +45,9 @@
 		{/each}
 	</TableBody>
 </Table>
+
+<style>
+	:global(.datatable-pagination button) {
+		cursor: pointer;
+	}
+</style>

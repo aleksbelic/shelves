@@ -12,7 +12,7 @@
 <Tabs tabStyle="underline">
 	<TabItem open>
 		{#snippet titleSlot()}
-			<div class="flex items-center gap-2">
+			<div class="flex cursor-pointer items-center gap-2">
 				<BookSolid size="md" />
 				Library
 			</div>
@@ -21,7 +21,7 @@
 	</TabItem>
 	<TabItem>
 		{#snippet titleSlot()}
-			<div class="flex items-center gap-2">
+			<div class="flex cursor-pointer items-center gap-2">
 				<ChartPieSolid size="md" />
 				Stats
 			</div>

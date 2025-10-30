@@ -9,6 +9,8 @@
 		alt="Shelves logo"
 	/>
 	<div class="absolute top-0 right-0">
-		<DarkMode class="border text-primary-500 dark:border-gray-600 dark:text-primary-600" />
+		<DarkMode
+			class="cursor-pointer border text-primary-500 dark:border-gray-600 dark:text-primary-600"
+		/>
 	</div>
 </div>
