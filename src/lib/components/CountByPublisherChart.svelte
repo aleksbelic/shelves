@@ -6,19 +6,24 @@
 
 	export let books: Book[] = [];
 
-	let bookCountByPublisher: Record<string, number> = {};
-	books.forEach((book) => {
-		if (book.publisher) {
-			bookCountByPublisher[book.publisher] = (bookCountByPublisher[book.publisher] || 0) + 1;
-		}
-	});
+	const bookCountByPublisher: Record<string, number> = books.reduce(
+		(acc, { publisher }) => {
+			if (publisher) acc[publisher] = (acc[publisher] || 0) + 1;
+			return acc;
+		},
+		{} as Record<string, number>
+	);
+
+	const bookCountByPublisherSorted = Object.fromEntries(
+		Object.entries(bookCountByPublisher).sort(([, a], [, b]) => b - a)
+	);
 
 	const options: ApexOptions = {
 		series: [
 			{
 				name: 'book count',
 				color: '#9DA3A3',
-				data: bookCountByPublisher ? Object.values(bookCountByPublisher) : []
+				data: bookCountByPublisherSorted ? Object.values(bookCountByPublisherSorted) : []
 			}
 		],
 		chart: {
@@ -65,7 +70,7 @@
 					cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
 				}
 			},
-			categories: bookCountByPublisher ? Object.keys(bookCountByPublisher) : [],
+			categories: bookCountByPublisherSorted ? Object.keys(bookCountByPublisherSorted) : [],
 			axisTicks: {
 				show: false
 			},
