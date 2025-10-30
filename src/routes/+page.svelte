@@ -5,6 +5,7 @@
 	import CountByPublisherChart from '$lib/components/CountByPublisherChart.svelte';
 	import CountByReadingStatusChart from '$lib/components/CountByReadingStatusChart.svelte';
 	import type { Book } from '$lib/types/Book';
+	import CountByAuthorChart from '$lib/components/CountByAuthorChart.svelte';
 
 	export let data: { books: Book[] };
 </script>
@@ -28,8 +29,9 @@
 		{/snippet}
 
 		<div class="flex w-full flex-col items-start justify-center gap-4 md:flex-row">
-			<CountByPublisherChart books={data.books} />
 			<CountByReadingStatusChart books={data.books} />
+			<CountByAuthorChart books={data.books} />
+			<CountByPublisherChart books={data.books} />
 		</div>
 	</TabItem>
 </Tabs>

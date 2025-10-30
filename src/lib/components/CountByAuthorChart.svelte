@@ -6,16 +6,23 @@
 
 	export let books: Book[] = [];
 
-	const bookCountByPublisher: Record<string, number> = books.reduce(
-		(acc, { publisher }) => {
-			if (publisher) acc[publisher] = (acc[publisher] || 0) + 1;
+	const bookCountByAuthor = books.reduce(
+		(acc, book) => {
+			const author = book.author;
+			if (author != null && Array.isArray(author) && author.length !== 0) {
+				author.forEach((name) => {
+					const key = String(name ?? 'unknown');
+					acc[key] = (acc[key] || 0) + 1;
+				});
+			}
+
 			return acc;
 		},
 		{} as Record<string, number>
 	);
 
-	const bookCountByPublisherSorted = Object.fromEntries(
-		Object.entries(bookCountByPublisher).sort(([, a], [, b]) => b - a)
+	const bookCountByAuthorSorted = Object.fromEntries(
+		Object.entries(bookCountByAuthor).sort(([, a], [, b]) => b - a)
 	);
 
 	const options: ApexOptions = {
@@ -23,7 +30,7 @@
 			{
 				name: 'book count',
 				color: '#9DA3A3',
-				data: bookCountByPublisherSorted ? Object.values(bookCountByPublisherSorted) : []
+				data: bookCountByAuthorSorted ? Object.values(bookCountByAuthorSorted) : []
 			}
 		],
 		chart: {
@@ -70,7 +77,7 @@
 					cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
 				}
 			},
-			categories: bookCountByPublisherSorted ? Object.keys(bookCountByPublisherSorted) : [],
+			categories: bookCountByAuthorSorted ? Object.keys(bookCountByAuthorSorted) : [],
 			axisTicks: {
 				show: false
 			},
@@ -102,9 +109,9 @@
 <Card class="p-4 md:p-6">
 	<div class="flex justify-between border-b border-gray-200 pb-3 dark:border-gray-700">
 		<dl>
-			<dt class="pb-1 text-base font-normal text-gray-500 dark:text-gray-400">Publishers</dt>
+			<dt class="pb-1 text-base font-normal text-gray-500 dark:text-gray-400">Authors</dt>
 			<dd class="text-3xl leading-none font-bold text-gray-900 dark:text-white">
-				{bookCountByPublisher ? Object.keys(bookCountByPublisher).length : 0}
+				{bookCountByAuthor ? Object.keys(bookCountByAuthor).length : 0}
 			</dd>
 		</dl>
 	</div>

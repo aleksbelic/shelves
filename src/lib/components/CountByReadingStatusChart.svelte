@@ -6,7 +6,7 @@
 
 	export let books: Book[] = [];
 
-	const booksReadingStatusStats = books.reduce(
+	const bookCountByReadingStatus = books.reduce(
 		(acc, book) => {
 			const status = book.readingStatus;
 			if (status != null) {
@@ -22,9 +22,9 @@
 
 	const options: ApexOptions = {
 		series: [
-			booksReadingStatusStats['finished'],
-			booksReadingStatusStats['in progress'],
-			booksReadingStatusStats['unknown']
+			bookCountByReadingStatus['finished'],
+			bookCountByReadingStatus['in progress'],
+			bookCountByReadingStatus['unknown']
 		],
 		colors: ['#2E3844', '#5B717F', '#9DA3A3'],
 		chart: {
