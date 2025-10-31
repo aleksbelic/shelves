@@ -1,40 +1,17 @@
-# &#128218; Shelves
+[![Live demo](https://img.shields.io/badge/demo-live-brightgreen)](https://shelves-three.vercel.app)
 
-### Live demo: https://shelves-three.vercel.app
+# Shelves 📚
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A small SvelteKit app for browsing and visualizing a books dataset. It uses PostgreSQL DB for data (hosted on [Supabase](https://supabase.com/)) and [Flowbite-Svelte](https://flowbite-svelte.com) for UI components and charts ().
 
-## Creating a project
+Please check live demo @ https://shelves-three.vercel.app
 
-If you're seeing this, you've probably already done this step. Congrats!
+![App screenshot](./static/screenshots/demo.png)
 
-```sh
-# create a new project in the current directory
-npx sv create
+## Features
 
-# create a new project in my-app
-npx sv create my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+- Server-side data loading from Supabase.
+- Interactive table (paginated, searchable, sortable) with `@flowbite-svelte-plugins/datatable`.
+- Charts showing counts by author / publisher / reading status etc., built with Flowbite chart plugin `@flowbite-svelte-plugins/chart`.
+- Light/Dark mode toggle.
+- Responsive layout.

@@ -74,13 +74,6 @@
 			position: 'bottom',
 			fontFamily: 'Inter, sans-serif'
 		},
-		yaxis: {
-			labels: {
-				formatter: function (value) {
-					return value;
-				}
-			}
-		},
 		xaxis: {
 			labels: {
 				formatter: function (value) {
