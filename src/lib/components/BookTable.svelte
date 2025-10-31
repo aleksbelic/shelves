@@ -37,10 +37,10 @@
 				<TableBodyCell>{(book.genre ?? []).join(', ')}</TableBodyCell>
 				<TableBodyCell>{book.publisher}</TableBodyCell>
 				<TableBodyCell>{book.isbn13}</TableBodyCell>
-				<TableBodyCell>{book.publishYear}</TableBodyCell>
-				<TableBodyCell>{book.edition}</TableBodyCell>
+				<TableBodyCell class="text-center">{book.publishYear}</TableBodyCell>
+				<TableBodyCell class="text-center">{book.edition}</TableBodyCell>
 				<TableBodyCell>{book.language}</TableBodyCell>
-				<TableBodyCell>{book.readingStatus}</TableBodyCell>
+				<TableBodyCell class="text-center">{book.readingStatus}</TableBodyCell>
 			</TableBodyRow>
 		{/each}
 	</TableBody>
