@@ -74,56 +74,63 @@ create table public.book_genre (
   constraint book_genre_genre_id_fkey foreign KEY (genre_id) references genre (id) on update CASCADE on delete RESTRICT
 ) TABLESPACE pg_default;
 
-INSERT INTO "public"."author" ("id", "name") VALUES ('1', 'Vladimir Belić'), ('2', 'Emilo Belić'), ('3', 'Miloš Janković'), ('4', 'Tomislav Gavrić'), ('5', 'Dragan Simović'), ('6', 'Dan Brown'), ('7', 'Nenad Džoni Racković'), ('8', 'Aleksa Gajić');
+INSERT INTO "public"."author" ("id", "name") VALUES ('1', 'Vladimir Belić'), ('2', 'Emilo Belić'), ('3', 'Miloš Janković'), ('4', 'Tomislav Gavrić'), ('5', 'Dragan Simović'), ('6', 'Dan Brown'), ('7', 'Nenad Džoni Racković'), ('8', 'Aleksa Gajić'), ('9', 'Clive Barker'), ('10', 'Arthur Conan Doyle'), ('11', 'Anton P. Čehov'), ('12', 'Hiroshi Sakurazaka'), ('13', 'Catriona Ward'), ('14', 'Goran Skrobonja'), ('15', 'Zoran S. Cvetković'), ('16', 'Nebojša Jovanović'), ('17', 'Slaviša Pavlović'), ('18', 'Stephen King'), ('19', 'Isaac Asimov'), ('20', 'Nenad Milkić'), ('21', 'Christof Paar'), ('22', 'Jan Pelzl'), ('23', 'Aleksandar Diklić'), ('24', 'Sheridan Le Fanu'), ('25', 'John R. R. Tolkien'), ('26', 'Danko Popović'), ('27', 'Dejan Stojiljković'), ('28', 'Petar II Petrović Njegoš'), ('29', 'Vladika Nikolaj Velimirović'), ('30', 'Miloš Crnjanski'), ('31', 'Vladimir Ćorović'), ('32', 'Art Spiegelman'), ('33', 'Robert Louis Stevenson'), ('34', 'Dušan Kovačević'), ('35', 'Liu Cixin'), ('36', 'Howard P. Lovecraft'), ('37', 'Petar Janjatović'), ('38', 'Tony Bacon');
 
-INSERT INTO "public"."publisher" ("id", "name") VALUES ('1', 'Medija centar "Odbrana"'), ('2', 'Solaris'), ('3', 'System comics');
+INSERT INTO "public"."publisher" ("id", "name") VALUES ('1', 'Medija centar "Odbrana"'), ('2', 'Solaris'), ('3', 'System comics'), ('4', 'Orfelin'), ('5', 'Vulkan'), ('6', 'Sumatra'), ('7', 'Haikasoru'), ('8', 'Laguna'), ('9', 'Agnosta'), ('10', 'Prometej'), ('11', 'Čarobna knjiga'), ('12', 'Springer'), ('13', 'Panonija Ruma'), ('14', 'TV produkcija Skordisk'), ('15', 'Otvorena knjiga'), ('16', 'Publik praktikum'), ('17', 'Knjiga Komerc'), ('18', 'Miba Books'), ('19', 'Algoritam'), ('20', 'Sezam Book'), ('21', 'Talija'), ('22', 'Komiko'), ('23', 'Only Smiley'), ('24', 'Žir izdavaštvo'), ('25', 'Self-published'), ('26', 'Chartwell Books');
 
-INSERT INTO "public"."book" ("id", "title", "publisher_id", "isbn", "edition", "publish_year", "language_id") VALUES ('1', 'Vojvoda Radomir Putnik', '1', '9788633505253', '3', '2024', '2'), ('2', 'Vojvoda Stepa Stepanović', '1', '9788633505246', '3', '2024', '2'), ('3', 'Vojvoda Živojin Mišić', '1', '9788633505260', '3', '2024', '2'), ('4', 'Vojvoda Petar Bojović', '1', '9788633505277', '3', '2024', '2'), ('5', 'Digitalna tvrđava', '2', '9788675600831', '2', '2010', '3'), ('6', 'Kralj ničega', '3', '9788689309874', null, '2024', '3'), ('7', 'Pakleno srce Kabal', '4', '9788660390853', null, '2025', '3'), ('8', 'Avanture Šerloka Holmsa', '5', '9788610015508', null, '2015', '3'), ('9', 'Paviljon br. 6', '6', '9788660340155', null, '2020', '2'), ('10', 'Edge of tomorrow', '7', '9781421576947', null, '2014', '1'), ('11', 'Poslednja kuća u ulici', '8', '9788652148417', null, '2023', '3'), ('12', 'Od šapata do vriska', '8', '9788652150465', null, '2024', '3'), ('13', 'Gebels: gospodar istinite laži', '9', '9788680636139', null, '2018', '3'), ('14', 'Dvor kneza Mihaila Obrenovića 1860 - 1868. ', '8', '9788652155071', null, '2025', '3'), ('15', 'Ratnici Crne ruke: besmrtna prethodnica', '10', '9788651513537', '3', '2020', '2'), ('16', 'Pod kupolom', '5', '9788610007169', '2', '2025', '3'), ('17', 'Zadužbina', '11', '9788677020897', null, '2017', '3'), ('18', 'Zadužbina i carstvo', '11', '9788677020910', null, '2009', '3'), ('19', 'Druga zadužbina', '11', '9788677020903', null, '2019', '3'), ('20', 'Understanding Cryptography: A Textbook for Students and Practitioners', '12', '9783642041006', null, '2010', '1'), ('21', 'Poslednja straža', '13', '9788687933972', null, '2021', '2'), ('22', 'Zov karaule', '13', '9788687933989', null, '2021', '2'), ('23', 'Besmrtni bataljon', '13', '9788687933996', null, '2021', '2'), ('24', 'Beograd večiti grad: sentimentalno putovanje kroz istoriju', '14', '9788692005329', '12', '2023', '2'), ('25', 'Karmila', '15', '9788676743353', null, '2020', '3');
+INSERT INTO "public"."book" ("id", "title", "publisher_id", "isbn", "edition", "publish_year", "language_id") VALUES ('1', 'Vojvoda Radomir Putnik', '1', '978-86-335-0525-3', '3', '2024', '2'), ('2', 'Vojvoda Stepa Stepanović', '1', '978-86-335-0524-6', '3', '2024', '2'), ('3', 'Vojvoda Živojin Mišić', '1', '978-86-335-0526-0', '3', '2024', '2'), ('4', 'Vojvoda Petar Bojović', '1', '978-86-335-0527-7', '3', '2024', '2'), ('5', 'Digitalna tvrđava', '2', '978-86-7560-083-1', '2', '2010', '3'), ('6', 'Kralj ničega', '3', '978-86-89309-87-4', null, '2024', '3'), ('7', 'Pakleno srce Kabal', '4', '978-86-6039-085-3', null, '2025', '3'), ('8', 'Avanture Šerloka Holmsa', '5', '978-86-10-01550-8', null, '2015', '3'), ('9', 'Paviljon br. 6', '6', '978-86-6034-015-5', null, '2020', '2'), ('10', 'Edge of tomorrow', '7', '978-1-4215-7694-7', null, '2014', '1'), ('11', 'Poslednja kuća u ulici', '8', '978-86-521-4841-7', null, '2023', '3'), ('12', 'Od šapata do vriska', '8', '978-86-521-5046-5', null, '2024', '3'), ('13', 'Gebels: gospodar istinite laži', '9', '978-86-80636-13-9', null, '2018', '3'), ('14', 'Dvor kneza Mihaila Obrenovića 1860 - 1868. ', '8', '978-86-521-5507-1', null, '2025', '3'), ('15', 'Ratnici Crne ruke: besmrtna prethodnica', '10', '978-86-515-1353-7', '3', '2020', '2'), ('16', 'Pod kupolom', '5', '978-86-10-00716-9', '2', '2025', '3'), ('17', 'Zadužbina', '11', '978-86-7702-089-7', null, '2017', '3'), ('18', 'Zadužbina i carstvo', '11', '978-86-7702-091-0', null, '2009', '3'), ('19', 'Druga zadužbina', '11', '978-86-7702-090-3', null, '2019', '3'), ('20', 'Understanding Cryptography: A Textbook for Students and Practitioners', '12', '978-3-642-04100-6', null, '2010', '1'), ('21', 'Poslednja straža', '13', '978-86-87933-97-2', null, '2021', '2'), ('22', 'Zov karaule', '13', '978-86-87933-98-9', null, '2021', '2'), ('23', 'Besmrtni bataljon', '13', '978-86-87933-99-6', null, '2021', '2'), ('24', 'Beograd večiti grad: sentimentalno putovanje kroz istoriju', '14', '978-86-920053-2-9', '12', '2023', '2'), ('25', 'Karmila', '15', '978-86-7674-335-3', null, '2020', '3'), ('26', 'Hobit (ili tamo i natrag)', '16', '978-86-6035-825-9', null, '2022', '3'), ('27', 'Gospodar prstenova: Družina prstena', '16', '978-86-6035-586-9', null, '2018', '3'), ('28', 'Gospodar prstenova: Dve kule', '16', '978-86-6035-587-6', null, '2018', '3'), ('29', 'Gospodar prstenova: Povratak kralja', '16', '978-86-6035-588-3', null, '2018', '3'), ('30', 'Knjiga o Milutinu', '17', '978-86-7712-467-0', '8', '2025', '2'), ('31', 'Dukat za lađara', '8', '978-86-521-4059-6', null, '2021', '2'), ('32', 'Gorski vijenac; Luča mikrokozma', '18', '978-86-89595-02-4', '4', '2024', '2'), ('33', 'Kroz tamnički prozor: poruke srpskom narodu iz logora Dahau', '19', '978-86-7662-197-2', null, '2025', '2'), ('34', 'Seobe', '8', '978-86-521-3082-5', '4', '2018', '2'), ('35', 'Sveti Sava u narodnom predanju', '20', '978-86-6105-198-2', null, '2017', '2'), ('36', 'Sveti Sava', '21', '978-86-6140-157-2', null, '2024', '2'), ('37', 'Maus: povest preživelog', '22', '978-86-87919-92-1', null, null, '3'), ('38', 'Istorija Srba', '23', '978-86-6429-011-1', null, null, '2'), ('39', 'Dr Džekil i gospodin Hajd', '15', '978-86-7674-340-7', null, '2020', '3'), ('40', 'Balkanski špijun', '8', '978-86-521-3140-2', '2', '2019', '2'), ('41', 'Kraj smrti', '8', '978-86-521-4315-3', null, '2021', '3'), ('42', 'Mračna šuma', '8', '978-86-521-3988-0', null, '2020', '3'), ('43', 'Senka nad Insmutom', '24', '978-86-902368-0-0', null, '2020', '3'), ('45', 'Ex YU rock enciklopedija', '25', '978-86-905317-1-4', '2', '2007', '3'), ('46', 'Legendary Guitars: An Illustrated Guide', '26', '978-0-7858-4131-9', null, '2022', '1');
 
-INSERT INTO "public"."genre" ("id", "name") VALUES ('1', 'scy-fi'), ('2', 'thriller'), ('3', 'historical fiction'), ('4', 'horror'), ('5', 'fantasy'), ('6', 'romance'), ('7', 'biography'), ('8', 'dystopian'), ('9', 'mystery'), ('10', 'graphic novel'), ('11', 'short stories'), ('12', 'autobiography'), ('13', 'historical'), ('14', 'true crime'), ('15', 'comedy'), ('16', 'crime fiction'), ('17', 'textbook'), ('18', 'mathematics'), ('19', 'science'), ('20', 'military');
+INSERT INTO "public"."genre" ("id", "name") VALUES ('1', 'scy-fi'), ('2', 'thriller'), ('3', 'historical fiction'), ('4', 'horror'), ('5', 'fantasy'), ('6', 'romance'), ('7', 'biography'), ('8', 'dystopian'), ('9', 'mystery'), ('10', 'graphic novel'), ('11', 'short stories'), ('12', 'autobiography'), ('13', 'historical'), ('14', 'true crime'), ('15', 'comedy'), ('16', 'crime fiction'), ('17', 'textbook'), ('18', 'mathematics'), ('19', 'science'), ('20', 'military'), ('21', 'philosophy'), ('22', 'religion'), ('23', 'encyclopedia'), ('24', 'music'), ('25', 'erotic');
 
 INSERT INTO "public"."reading_status" ("id", "name") VALUES ('1', 'finished'), ('2', 'want to read'), ('3', 'in progress');
 
-INSERT INTO "public"."book_author" ("book_id", "author_id") VALUES ('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('4', '5'), ('5', '6'), ('6', '7'), ('6', '8');
+INSERT INTO "public"."language" ("id", "name", "code") VALUES ('1', 'English', 'en'), ('2', 'Serbian (Cyrillic)', 'sr-Cyrl'), ('3', 'Serbian (Latin)', 'sr-Latn');
 
-INSERT INTO "public"."book_genre" ("book_id", "genre_id") VALUES ('5', '2'), ('8', '9'), ('8', '16'), ('10', '1'), ('12', '4'), ('14', '7'), ('14', '13'), ('17', '1'), ('18', '1'), ('19', '1'), ('20', '17'), ('20', '18'), ('21', '13'), ('21', '20'), ('22', '13'), ('22', '20'), ('23', '13'), ('23', '20'), ('24', '13'), ('25', '4');
+INSERT INTO "public"."book_author" ("book_id", "author_id") VALUES ('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('4', '5'), ('5', '6'), ('6', '7'), ('6', '8'), ('7', '9'), ('8', '10'), ('9', '11'), ('10', '12'), ('11', '13'), ('12', '14'), ('13', '15'), ('14', '16'), ('15', '17'), ('16', '18'), ('17', '19'), ('18', '19'), ('19', '19'), ('20', '21'), ('20', '22'), ('21', '20'), ('22', '20'), ('23', '20'), ('24', '23'), ('25', '24'), ('26', '25'), ('27', '25'), ('28', '25'), ('29', '25'), ('30', '26'), ('31', '27'), ('32', '28'), ('33', '29'), ('34', '30'), ('35', '31'), ('36', '30'), ('37', '32'), ('38', '31'), ('39', '33'), ('40', '34'), ('41', '35'), ('42', '35'), ('43', '36'), ('45', '37'), ('46', '38');
 
-INSERT INTO "public"."book_reading_status" ("book_id", "reading_status_id") VALUES ('5', '1'), ('6', '3'), ('7', '3');
+INSERT INTO "public"."book_reading_status" ("book_id", "reading_status_id") VALUES ('5', '1'), ('6', '3'), ('7', '3'), ('43', '1');
 
-CREATE OR REPLACE VIEW public.books_full_view
-WITH (security_invoker = on) AS
-SELECT
+INSERT INTO "public"."book_genre" ("book_id", "genre_id") VALUES ('5', '2'), ('8', '9'), ('8', '16'), ('10', '1'), ('12', '4'), ('14', '7'), ('14', '13'), ('17', '1'), ('18', '1'), ('19', '1'), ('20', '17'), ('20', '18'), ('21', '13'), ('21', '20'), ('22', '13'), ('22', '20'), ('23', '13'), ('23', '20'), ('24', '13'), ('25', '4'), ('26', '5'), ('27', '5'), ('28', '5'), ('29', '5'), ('30', '3'), ('31', '3'), ('33', '21'), ('33', '22'), ('37', '10'), ('38', '13'), ('41', '1'), ('42', '1'), ('43', '4'), ('45', '23'), ('45', '24'), ('46', '23'), ('46', '24');
+
+create view public.books_full_view as
+select
   b.id,
-  b.title,
-  ARRAY_AGG(DISTINCT a.name ORDER BY a.name) AS author,
-  p.name AS publisher_name,
+  b.title, 
+  array_agg(
+    distinct a.name
+    order by
+      a.name
+  ) as author,
+  p.name as publisher_name,
   b.isbn,
-  ARRAY_AGG(DISTINCT g.name ORDER BY g.name) AS genre,
+  array_agg(
+    distinct g.name
+    order by
+      g.name
+  ) as genre,
   b.publish_year,
   b.edition,
-  l.name AS language_name,
-  rs.name AS reading_status_name
-FROM
-  public.book b
-LEFT JOIN
-  public.publisher p ON b.publisher_id = p.id
-JOIN
-  public.language l ON b.language_id = l.id
-LEFT JOIN
-  public.book_author ba ON b.id = ba.book_id
-LEFT JOIN
-  public.author a ON ba.author_id = a.id
-LEFT JOIN
-  public.book_genre bg ON b.id = bg.book_id
-LEFT JOIN
-  public.genre g ON bg.genre_id = g.id
-LEFT JOIN
-  public.book_reading_status brs ON b.id = brs.book_id
-LEFT JOIN
-  public.reading_status rs ON brs.reading_status_id = rs.id
-GROUP BY
-  b.id, b.title, b.isbn, b.edition, b.publish_year,
-  p.name, l.name, rs.name;
+  l.name as language_name,
+  rs.name as reading_status_name
+from
+  book b
+  left join publisher p on b.publisher_id = p.id
+  join language l on b.language_id = l.id
+  left join book_author ba on b.id = ba.book_id
+  left join author a on ba.author_id = a.id
+  left join book_genre bg on b.id = bg.book_id
+  left join genre g on bg.genre_id = g.id
+  left join book_reading_status brs on b.id = brs.book_id
+  left join reading_status rs on brs.reading_status_id = rs.id
+group by
+  b.id,
+  b.title,
+  b.isbn,
+  b.edition,
+  b.publish_year,
+  p.name,
+  l.name,
+  rs.name;
 
 CREATE POLICY anon_select_book ON public.book
   FOR SELECT
