@@ -2,7 +2,7 @@
 
 # Shelves 📚
 
-A small SvelteKit app for browsing and visualizing a books dataset. It uses PostgreSQL DB for data (hosted on [Supabase](https://supabase.com/)) and [Flowbite-Svelte](https://flowbite-svelte.com) for UI components and charts ().
+A lightweight SvelteKit app that lets you browse and visualize your book collection. It uses PostgreSQL for data storage (via [Supabase](https://supabase.com/)) and [Flowbite-Svelte](https://flowbite-svelte.com) for UI components and charts.
 
 Please check live demo @ https://shelves-three.vercel.app
 
@@ -10,8 +10,8 @@ Please check live demo @ https://shelves-three.vercel.app
 
 ## Features
 
-- Server-side data loading from Supabase.
-- Interactive table (paginated, searchable, sortable) with `@flowbite-svelte-plugins/datatable`.
-- Charts showing counts by author / publisher / reading status etc., built with Flowbite chart plugin `@flowbite-svelte-plugins/chart`.
-- Light/Dark mode toggle.
-- Responsive layout.
+- Server-side data loading from Supabase
+- Interactive, paginated, searchable, and sortable table built with `@flowbite-svelte-plugins/datatable`.
+- Charts displaying counts by author, publisher, reading status, etc., using `@flowbite-svelte-plugins/chart`
+- Light/Dark mode toggle
+- Fully responsive layout
