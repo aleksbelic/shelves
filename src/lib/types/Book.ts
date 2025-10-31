@@ -4,7 +4,7 @@ export type Book = {
 	author: string[];
 	genre?: string[];
 	publisher: string;
-	isbn: string;
+	isbn13: string;
 	publishYear?: number;
 	edition?: string;
 	language: string;

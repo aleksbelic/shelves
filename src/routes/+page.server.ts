@@ -10,7 +10,7 @@ export async function load() {
 		author: book.author ?? [],
 		genre: book.genre ?? [],
 		publisher: book.publisher_name ?? '',
-		isbn: book.isbn ?? '',
+		isbn13: book.isbn_13 ?? '',
 		publishYear: book.publish_year ?? null,
 		edition: book.edition ?? null,
 		language: book.language_name ?? '',

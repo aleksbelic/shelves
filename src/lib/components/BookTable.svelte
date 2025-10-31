@@ -20,7 +20,7 @@
 		<TableHeadCell>Author</TableHeadCell>
 		<TableHeadCell>Genre</TableHeadCell>
 		<TableHeadCell>Publisher</TableHeadCell>
-		<TableHeadCell>ISBN</TableHeadCell>
+		<TableHeadCell>ISBN 13</TableHeadCell>
 		<TableHeadCell>Publish year</TableHeadCell>
 		<TableHeadCell>Edition</TableHeadCell>
 		<TableHeadCell>Language</TableHeadCell>
@@ -36,7 +36,7 @@
 				<TableBodyCell>{book.author.join(', ')}</TableBodyCell>
 				<TableBodyCell>{(book.genre ?? []).join(', ')}</TableBodyCell>
 				<TableBodyCell>{book.publisher}</TableBodyCell>
-				<TableBodyCell>{book.isbn}</TableBodyCell>
+				<TableBodyCell>{book.isbn13}</TableBodyCell>
 				<TableBodyCell>{book.publishYear}</TableBodyCell>
 				<TableBodyCell>{book.edition}</TableBodyCell>
 				<TableBodyCell>{book.language}</TableBodyCell>
