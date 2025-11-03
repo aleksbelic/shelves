@@ -1,11 +1,15 @@
 <script lang="ts">
-	import { Input } from 'flowbite-svelte';
+	import { Label, Input, Helper } from 'flowbite-svelte';
+    import { ArrowRightOutline } from 'flowbite-svelte-icons';
 
-	let isbn13: string = '';
-	let isbn10: string = '';
-	let error: string = '';
+	let isbn13 = '';
+	let isbn10 = '';
+	let errorIsbn13 = '';
+    let errorIsbn10 = '';
 
 	function isbn13To10(isbn13: string): string {
+        isbn13 = isbn13.trim();
+        
 		if (!/^[0-9-]+$/.test(isbn13)) {
 			throw new Error('ISBN 13 invalid format: only digits and hyphens are allowed');
 		} else if (isbn13.split('-').length - 1 !== 4) {
@@ -48,49 +52,49 @@
 
 	function convert13to10(): void {
 		try {
-			error = '';
+			errorIsbn13 = '';
 			isbn10 = isbn13To10(isbn13);
 		} catch (e) {
-			error = (e as Error).message;
+			errorIsbn13 = (e as Error).message;
 			isbn10 = '';
 		}
 	}
 
 	function convert10to13(): void {
 		try {
-			error = '';
+			errorIsbn10 = '';
 			isbn13 = toIsbn13(isbn10);
 		} catch (e) {
-			error = (e as Error).message;
+			errorIsbn10 = (e as Error).message;
 			isbn13 = '';
 		}
 	}
 </script>
 
-<div>
-	<div class="flex flex-col space-y-2 space-x-4 sm:flex-row sm:space-y-0">
-		<Input bind:value={isbn13} placeholder="Enter ISBN 13, e.g. 978-86-6361-196-2" size="lg" />
+<div class="mb-6 width-full sm:w-[400px]">
+    <Label for="isbn13" class="mb-2 text-lg font-bold" color={errorIsbn13 ? 'red' : undefined}>ISBN 13</Label>
+	<div class="flex flex-row space-x-4">
+		<Input id="isbn13" bind:value={isbn13} placeholder="e.g. 978-86-6361-196-2" />
 		<button
 			on:click={convert13to10}
-			class="rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-700"
-		>
-			Convert to ISBN-10
-		</button>
+			class="rounded px-8 py-2 font-bold text-white bg-primary-600 hover:bg-primary-700 cursor-pointer whitespace-nowrap"
+		><ArrowRightOutline />ISBN-10</button>
 	</div>
+    {#if errorIsbn13}
+        <Helper class="mt-2 text-sm font-bold" color="red">{errorIsbn13}</Helper>
+	{/if}
+</div>
 
-	<hr class="my-4" />
-
+<div class="mb-6 width-full sm:w-[400px]">
+    <Label for="isbn10" class="mb-2 text-lg font-bold" color={errorIsbn10 ? 'red' : undefined}>ISBN 10</Label>
 	<div class="flex flex-col space-y-2 space-x-4 sm:flex-row sm:space-y-0">
-		<Input bind:value={isbn10} placeholder="Enter ISBN 10, e.g. 86-6361-196-X" size="lg" />
+		<Input id="isbn10" bind:value={isbn10} placeholder="e.g. 86-6361-196-X" />
 		<button
 			on:click={convert10to13}
-			class="rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-700"
-		>
-			Convert to ISBN-13
-		</button>
+			class="rounded px-8 py-2 font-bold text-white bg-primary-600 hover:bg-primary-700 cursor-pointer"
+		><ArrowRightOutline />ISBN-13</button>
 	</div>
-
-	{#if error}
-		<p class="mt-4 font-medium text-red-600">{error}</p>
+    {#if errorIsbn10}
+        <Helper class="mt-2 text-sm font-bold" color="red">{errorIsbn10}</Helper>
 	{/if}
 </div>
