@@ -6,7 +6,6 @@
 	import CountByReadingStatusChart from '$lib/components/CountByReadingStatusChart.svelte';
 	import type { Book } from '$lib/types/Book';
 	import CountByAuthorChart from '$lib/components/CountByAuthorChart.svelte';
-	import IsbnConverter from '$lib/components/IsbnConverter.svelte';
 
 	export let data: { books: Book[] };
 </script>
@@ -34,14 +33,5 @@
 			<CountByAuthorChart books={data.books} />
 			<CountByPublisherChart books={data.books} />
 		</div>
-	</TabItem>
-	<TabItem>
-		{#snippet titleSlot()}
-			<div class="flex cursor-pointer items-center gap-2">
-				<BarcodeOutline size="md" />
-				ISBN Converter
-			</div>
-		{/snippet}
-		<IsbnConverter />
 	</TabItem>
 </Tabs>
