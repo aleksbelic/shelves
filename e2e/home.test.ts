@@ -1,6 +1,13 @@
-import { expect, test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
+import { HomePage } from './pages/home.page';
 
-test('home page has correct title', async ({ page }) => {
-    await page.goto('/');
-    expect(await page.title()).toBe('Shelves');
+test('Home Page is displayed correctly', async ({ page }) => {
+	const homePage = new HomePage(page);
+	await homePage.goto();
+
+	await homePage.navbar.shouldHaveLogoVisible();
+	await homePage.navbar.shouldHaveThemeToggleButtonVisible();
+
+	await expect(homePage.libraryTabBtn).toBeVisible();
+	await expect(homePage.statsTabBtn).toBeVisible();
 });

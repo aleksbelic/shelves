@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Tabs, TabItem, Spinner } from 'flowbite-svelte';
-	import { BookSolid, ChartPieSolid, BarcodeOutline } from 'flowbite-svelte-icons';
+	import { BookSolid, ChartPieSolid } from 'flowbite-svelte-icons';
 	import BookTable from '$lib/components/BookTable.svelte';
 	import CountByPublisherChart from '$lib/components/CountByPublisherChart.svelte';
 	import CountByReadingStatusChart from '$lib/components/CountByReadingStatusChart.svelte';
@@ -23,7 +23,7 @@
 	</div>
 {:else}
 	<Tabs tabStyle="underline">
-		<TabItem open>
+		<TabItem data-testid="library-tab-btn" open>
 			{#snippet titleSlot()}
 				<div class="flex cursor-pointer items-center gap-2">
 					<BookSolid size="md" />
@@ -32,7 +32,7 @@
 			{/snippet}
 			<BookTable books={data.books} />
 		</TabItem>
-		<TabItem>
+		<TabItem data-testid="stats-tab-btn">
 			{#snippet titleSlot()}
 				<div class="flex cursor-pointer items-center gap-2">
 					<ChartPieSolid size="md" />
