@@ -13,7 +13,9 @@
 	export let books: Book[] = [];
 </script>
 
-<Table dataTableOptions={{ searchable: true, sortable: true, perPageSelect: [10, 20, 30] }}>
+<Table
+	dataTableOptions={{ searchable: true, sortable: true, perPageSelect: [10, 20, 30, 50, 100] }}
+>
 	<TableHead>
 		<TableHeadCell>#</TableHeadCell>
 		<TableHeadCell>Title</TableHeadCell>
