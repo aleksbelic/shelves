@@ -1,8 +1,9 @@
 <script lang="ts">
 	import type { ApexOptions } from 'apexcharts';
 	import { Chart } from '@flowbite-svelte-plugins/chart';
-	import { Card } from 'flowbite-svelte';
+	import { Card, Popover } from 'flowbite-svelte';
 	import type { Book } from '$lib/types/Book';
+	import { InfoCircleSolid } from 'flowbite-svelte-icons';
 
 	export let books: Book[] = [];
 
@@ -108,7 +109,26 @@
 <Card class="p-4 md:p-6">
 	<div class="flex justify-between border-b border-gray-200 pb-3 dark:border-gray-700">
 		<dl>
-			<dt class="pb-1 text-base font-normal text-gray-500 dark:text-gray-400">Genres</dt>
+			<dt
+				class="inline-flex items-center pb-1 text-base font-normal text-gray-500 dark:text-gray-400"
+			>
+				Genres <InfoCircleSolid
+					id="genres-info"
+					class="ms-1 h-3.5 w-3.5 cursor-pointer text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+				/>
+			</dt>
+
+			<Popover
+				triggeredBy="#genres-info"
+				class="z-10 w-72 rounded-lg border border-gray-200 bg-white text-sm text-gray-500 shadow-xs dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400"
+			>
+				<div class="space-y-2 p-3">
+					<p>
+						Each book may belong to multiple genres or none. Books without a genre are excluded from
+						this count.
+					</p>
+				</div>
+			</Popover>
 			<dd class="text-3xl leading-none font-bold text-gray-900 dark:text-white">
 				{bookCountByGenre ? Object.keys(bookCountByGenre).length : 0}
 			</dd>

@@ -111,7 +111,8 @@
 		<dl>
 			<dt class="pb-1 text-base font-normal text-gray-500 dark:text-gray-400">Authors</dt>
 			<dd class="text-3xl leading-none font-bold text-gray-900 dark:text-white">
-				{bookCountByAuthor ? Object.keys(bookCountByAuthor).length : 0}
+				<!-- subtract 1 for 'unknown' author -->
+				{bookCountByAuthor ? Object.keys(bookCountByAuthor).length - 1 : 0}
 			</dd>
 		</dl>
 	</div>
