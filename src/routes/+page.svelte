@@ -2,10 +2,11 @@
 	import { Tabs, TabItem, Spinner } from 'flowbite-svelte';
 	import { BookSolid, ChartPieSolid } from 'flowbite-svelte-icons';
 	import BookTable from '$lib/components/BookTable.svelte';
+	import type { Book } from '$lib/types/Book';
 	import CountByPublisherChart from '$lib/components/CountByPublisherChart.svelte';
 	import CountByReadingStatusChart from '$lib/components/CountByReadingStatusChart.svelte';
-	import type { Book } from '$lib/types/Book';
 	import CountByAuthorChart from '$lib/components/CountByAuthorChart.svelte';
+	import CountByGenreChart from '$lib/components/CountByGenreChart.svelte';
 	import { onMount } from 'svelte';
 
 	export let data: { books: Book[] };
@@ -42,6 +43,7 @@
 
 			<div class="flex w-full flex-col items-start justify-center gap-4 md:flex-row">
 				<CountByReadingStatusChart books={data.books} />
+				<CountByGenreChart books={data.books} />
 				<CountByAuthorChart books={data.books} />
 				<CountByPublisherChart books={data.books} />
 			</div>
