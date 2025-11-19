@@ -61,7 +61,7 @@ create table public.book_author (
 create table public.book_reading_status (
   book_id bigint not null,
   reading_status_id bigint not null,
-  constraint book_reading_status_pkey primary key (book_id, reading_status_id),
+  constraint book_reading_status_pkey primary key (book_id),
   constraint book_reading_status_book_id_fkey foreign KEY (book_id) references book (id) on update CASCADE on delete RESTRICT,
   constraint book_reading_status_reading_status_id_fkey foreign KEY (reading_status_id) references reading_status (id) on update CASCADE on delete RESTRICT
 ) TABLESPACE pg_default;
