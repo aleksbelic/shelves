@@ -39,7 +39,7 @@
 			},
 			type: 'bar',
 			width: '100%',
-			height: '1200px',
+			height: `${Math.floor(Object.keys(bookCountByGenreSorted).length / 0.04)}px`,
 			toolbar: {
 				show: false
 			}
