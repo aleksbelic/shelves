@@ -9,6 +9,8 @@
 		TableHeadCell
 	} from '@flowbite-svelte-plugins/datatable';
 	import type { Book } from '$lib/types/Book';
+	import { isIsbn13Valid } from '$lib/utils/isbn13';
+	import { ExclamationCircleOutline, ExclamationCircleSolid } from 'flowbite-svelte-icons';
 
 	export let books: Book[] = [];
 </script>
@@ -38,7 +40,19 @@
 				<TableBodyCell>{book.author.join(', ')}</TableBodyCell>
 				<TableBodyCell>{(book.genre ?? []).join(', ')}</TableBodyCell>
 				<TableBodyCell>{book.publisher}</TableBodyCell>
-				<TableBodyCell>{book.isbn13}</TableBodyCell>
+				<TableBodyCell>
+					{book.isbn13}
+					{#if !isIsbn13Valid(book.isbn13)}
+						<ExclamationCircleSolid
+							id="invalid-isbn13-icon-light"
+							class="ml-1 h-6 w-6 text-yellow-500 dark:hidden"
+						/>
+						<ExclamationCircleOutline
+							id="invalid-isbn13-icon-dark"
+							class="ml-1 hidden h-6 w-6 text-yellow-500 dark:inline"
+						/>
+					{/if}
+				</TableBodyCell>
 				<TableBodyCell class="text-center">{book.publishYear}</TableBodyCell>
 				<TableBodyCell class="text-center">{book.edition}</TableBodyCell>
 				<TableBodyCell>{book.language}</TableBodyCell>
