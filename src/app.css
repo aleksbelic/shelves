@@ -28,8 +28,8 @@
 	--color-secondary-900: #0c4a6e;
 }
 
-@source "../node_modules/flowbite-svelte/dist";
-@source "../node_modules/flowbite-svelte-icons/dist";
+@source '../node_modules/flowbite-svelte/dist';
+@source '../node_modules/flowbite-svelte-icons/dist';
 
 @layer base {
 	/* disable chrome cancel button */
@@ -39,11 +39,11 @@
 }
 
 /* DataTables plugin by Flowbite */
-@source "../node_modules/simple-datatables/dist";
-@source "../node_modules/@flowbite-svelte-plugins/datatable/dist";
+@source '../node_modules/simple-datatables/dist';
+@source '../node_modules/@flowbite-svelte-plugins/datatable/dist';
 
 /* Chart plugin by Flowbite */
-@source "../node_modules/@flowbite-svelte-plugins/chart/dist";
+@source '../node_modules/@flowbite-svelte-plugins/chart/dist';
 
 .datatable-pagination .datatable-active a,
 .datatable-pagination .datatable-active a:focus,
