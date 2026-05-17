@@ -17,6 +17,7 @@
 
 <Table
 	dataTableOptions={{ searchable: true, sortable: true, perPageSelect: [10, 20, 30, 50, 100] }}
+	data-testid="book-table"
 >
 	<TableHead>
 		<TableHeadCell>#</TableHeadCell>
