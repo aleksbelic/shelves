@@ -2,7 +2,8 @@
 	import type { ApexOptions } from 'apexcharts';
 	import { Chart } from '@flowbite-svelte-plugins/chart';
 	import { Card } from 'flowbite-svelte';
-	import type { Book } from '$lib/types/Book';
+	import type { Book } from '$lib/types';
+	import { barChartHeight, topNSorted } from '$lib/utils/chartCounts';
 
 	export let books: Book[] = [];
 
@@ -21,9 +22,13 @@
 		{} as Record<string, number>
 	);
 
-	const bookCountByAuthorSorted = Object.fromEntries(
-		Object.entries(bookCountByAuthor).sort(([, a], [, b]) => b - a)
-	);
+	const {
+		entries: topAuthorEntries,
+		total: totalAuthors,
+		hidden: hiddenAuthors
+	} = topNSorted(bookCountByAuthor);
+	const bookCountByAuthorSorted = Object.fromEntries(topAuthorEntries);
+	const authorChartHeight = barChartHeight(topAuthorEntries.length);
 
 	const options: ApexOptions = {
 		series: [
@@ -39,7 +44,7 @@
 			},
 			type: 'bar',
 			width: '100%',
-			height: `${Math.floor(Object.keys(bookCountByAuthorSorted).length / 0.05)}px`,
+			height: `${authorChartHeight}px`,
 			toolbar: {
 				show: false
 			}
@@ -114,6 +119,11 @@
 				<!-- subtract 1 for 'unknown' author -->
 				{bookCountByAuthor ? Object.keys(bookCountByAuthor).length - 1 : 0}
 			</dd>
+			{#if hiddenAuthors > 0}
+				<dd class="pt-1 text-xs font-normal text-gray-500 dark:text-gray-400">
+					Showing top {topAuthorEntries.length} of {totalAuthors}
+				</dd>
+			{/if}
 		</dl>
 	</div>
 

@@ -8,7 +8,7 @@
 		TableHead,
 		TableHeadCell
 	} from '@flowbite-svelte-plugins/datatable';
-	import type { Book } from '$lib/types/Book';
+	import type { Book } from '$lib/types';
 	import { isIsbn13Valid } from '$lib/utils/isbn13';
 	import { ExclamationCircleOutline, ExclamationCircleSolid } from 'flowbite-svelte-icons';
 

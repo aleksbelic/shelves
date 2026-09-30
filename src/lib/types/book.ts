@@ -5,8 +5,8 @@ export type Book = {
 	genre?: string[];
 	publisher: string;
 	isbn13: string;
-	publishYear?: number;
-	edition?: string;
+	publishYear?: number | null;
+	edition?: string | null;
 	language: string;
-	readingStatus?: string;
+	readingStatus?: string | null;
 };

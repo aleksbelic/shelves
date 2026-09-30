@@ -2,8 +2,9 @@
 	import type { ApexOptions } from 'apexcharts';
 	import { Chart } from '@flowbite-svelte-plugins/chart';
 	import { Card, Popover } from 'flowbite-svelte';
-	import type { Book } from '$lib/types/Book';
+	import type { Book } from '$lib/types';
 	import { InfoCircleSolid } from 'flowbite-svelte-icons';
+	import { barChartHeight, topNSorted } from '$lib/utils/chartCounts';
 
 	export let books: Book[] = [];
 
@@ -21,9 +22,13 @@
 		{} as Record<string, number>
 	);
 
-	const bookCountByGenreSorted = Object.fromEntries(
-		Object.entries(bookCountByGenre).sort(([, a], [, b]) => b - a)
-	);
+	const {
+		entries: topGenreEntries,
+		total: totalGenres,
+		hidden: hiddenGenres
+	} = topNSorted(bookCountByGenre);
+	const bookCountByGenreSorted = Object.fromEntries(topGenreEntries);
+	const genreChartHeight = barChartHeight(topGenreEntries.length);
 
 	const options: ApexOptions = {
 		series: [
@@ -39,7 +44,7 @@
 			},
 			type: 'bar',
 			width: '100%',
-			height: `${Math.floor(Object.keys(bookCountByGenreSorted).length / 0.04)}px`,
+			height: `${genreChartHeight}px`,
 			toolbar: {
 				show: false
 			}
@@ -132,6 +137,11 @@
 			<dd class="text-3xl leading-none font-bold text-gray-900 dark:text-white">
 				{bookCountByGenre ? Object.keys(bookCountByGenre).length : 0}
 			</dd>
+			{#if hiddenGenres > 0}
+				<dd class="pt-1 text-xs font-normal text-gray-500 dark:text-gray-400">
+					Showing top {topGenreEntries.length} of {totalGenres}
+				</dd>
+			{/if}
 		</dl>
 	</div>
 

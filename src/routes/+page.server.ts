@@ -1,10 +1,16 @@
+import { error } from '@sveltejs/kit';
 import { supabase } from '$lib/supabaseClient';
-import type { Book } from '$lib/types/Book';
+import { BOOK_COLUMNS, type Book, type BookRow } from '$lib/types';
 
 export async function load() {
-	const { data } = await supabase.from('books_full_view').select('*').order('title');
+	const { data, error: sbError } = await supabase
+		.from('books_full_view')
+		.select(BOOK_COLUMNS.join(','))
+		.order('title');
 
-	const books: Book[] = (data ?? []).map((book: any) => ({
+	if (sbError) throw error(500, `Failed to load books: ${sbError.message}`);
+
+	const books: Book[] = ((data ?? []) as unknown as BookRow[]).map((book) => ({
 		id: book.id,
 		title: book.title,
 		author: book.author ?? [],
