@@ -3,112 +3,31 @@
 	import { Chart } from '@flowbite-svelte-plugins/chart';
 	import { Card } from 'flowbite-svelte';
 	import type { Book } from '$lib/types';
-	import { barChartHeight, topNSorted } from '$lib/utils/chartCounts';
+	import { barChartHeight, createBarOptions, topNSorted } from '$lib/utils/chartCounts';
 
-	export let books: Book[] = [];
+	let { books = [] }: { books: Book[] } = $props();
 
-	const bookCountByAuthor = books.reduce(
-		(acc, book) => {
-			const author = book.author;
-			if (author != null && Array.isArray(author) && author.length !== 0) {
-				author.forEach((name) => {
-					const key = String(name ?? 'unknown');
-					acc[key] = (acc[key] || 0) + 1;
+	const bookCountByAuthor = $derived(
+		books.reduce(
+			(acc, book) => {
+				book.author?.forEach((name) => {
+					if (name) acc[name] = (acc[name] || 0) + 1;
 				});
-			}
-
-			return acc;
-		},
-		{} as Record<string, number>
+				return acc;
+			},
+			{} as Record<string, number>
+		)
 	);
 
-	const {
-		entries: topAuthorEntries,
-		total: totalAuthors,
-		hidden: hiddenAuthors
-	} = topNSorted(bookCountByAuthor);
-	const bookCountByAuthorSorted = Object.fromEntries(topAuthorEntries);
-	const authorChartHeight = barChartHeight(topAuthorEntries.length);
+	const topAuthors = $derived(topNSorted(bookCountByAuthor));
 
-	const options: ApexOptions = {
-		series: [
-			{
-				name: 'book count',
-				color: '#9DA3A3',
-				data: bookCountByAuthorSorted ? Object.values(bookCountByAuthorSorted) : []
-			}
-		],
-		chart: {
-			sparkline: {
-				enabled: false
-			},
-			type: 'bar',
-			width: '100%',
-			height: `${authorChartHeight}px`,
-			toolbar: {
-				show: false
-			}
-		},
-		fill: {
-			opacity: 1
-		},
-		plotOptions: {
-			bar: {
-				horizontal: true,
-				columnWidth: '100%',
-				borderRadiusApplication: 'end',
-				borderRadius: 3,
-				dataLabels: {
-					position: 'top'
-				}
-			}
-		},
-		legend: {
-			show: true,
-			position: 'bottom'
-		},
-		dataLabels: {
-			enabled: false
-		},
-		tooltip: {
-			shared: true,
-			intersect: false
-		},
-		xaxis: {
-			labels: {
-				show: true,
-				style: {
-					fontFamily: 'Inter, sans-serif',
-					cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
-				}
-			},
-			categories: bookCountByAuthorSorted ? Object.keys(bookCountByAuthorSorted) : [],
-			axisTicks: {
-				show: false
-			},
-			axisBorder: {
-				show: false
-			}
-		},
-		yaxis: {
-			labels: {
-				show: true,
-				style: {
-					fontFamily: 'Inter, sans-serif',
-					cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
-				}
-			}
-		},
-		grid: {
-			show: true,
-			strokeDashArray: 4,
-			padding: {
-				left: 2,
-				right: 2,
-				top: -20
-			}
-		}
-	};
+	const options: ApexOptions = $derived(
+		createBarOptions({
+			categories: topAuthors.entries.map(([name]) => name),
+			data: topAuthors.entries.map(([, count]) => count),
+			height: barChartHeight(topAuthors.entries.length)
+		})
+	);
 </script>
 
 <Card class="p-4 md:p-6">
@@ -116,12 +35,11 @@
 		<dl>
 			<dt class="pb-1 text-base font-normal text-gray-500 dark:text-gray-400">Authors</dt>
 			<dd class="text-3xl leading-none font-bold text-gray-900 dark:text-white">
-				<!-- subtract 1 for 'unknown' author -->
-				{bookCountByAuthor ? Object.keys(bookCountByAuthor).length - 1 : 0}
+				{Object.keys(bookCountByAuthor).length}
 			</dd>
-			{#if hiddenAuthors > 0}
+			{#if topAuthors.hidden > 0}
 				<dd class="pt-1 text-xs font-normal text-gray-500 dark:text-gray-400">
-					Showing top {topAuthorEntries.length} of {totalAuthors}
+					Showing top {topAuthors.entries.length} of {topAuthors.total}
 				</dd>
 			{/if}
 		</dl>

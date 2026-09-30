@@ -4,111 +4,34 @@
 	import { Card, Popover } from 'flowbite-svelte';
 	import type { Book } from '$lib/types';
 	import { InfoCircleSolid } from 'flowbite-svelte-icons';
-	import { barChartHeight, topNSorted } from '$lib/utils/chartCounts';
+	import { barChartHeight, createBarOptions, topNSorted } from '$lib/utils/chartCounts';
 
-	export let books: Book[] = [];
+	let { books = [] }: { books: Book[] } = $props();
 
-	const bookCountByGenre = books.reduce(
-		(acc, book) => {
-			const genre = book.genre;
-			genre?.forEach((genreName) => {
-				if (genreName !== null) {
-					acc[genreName] = (acc[genreName] || 0) + 1;
-				}
-			});
+	const bookCountByGenre = $derived(
+		books.reduce(
+			(acc, book) => {
+				book.genre?.forEach((genreName) => {
+					if (genreName) {
+						acc[genreName] = (acc[genreName] || 0) + 1;
+					}
+				});
 
-			return acc;
-		},
-		{} as Record<string, number>
+				return acc;
+			},
+			{} as Record<string, number>
+		)
 	);
 
-	const {
-		entries: topGenreEntries,
-		total: totalGenres,
-		hidden: hiddenGenres
-	} = topNSorted(bookCountByGenre);
-	const bookCountByGenreSorted = Object.fromEntries(topGenreEntries);
-	const genreChartHeight = barChartHeight(topGenreEntries.length);
+	const topGenres = $derived(topNSorted(bookCountByGenre));
 
-	const options: ApexOptions = {
-		series: [
-			{
-				name: 'book count',
-				color: '#9DA3A3',
-				data: bookCountByGenreSorted ? Object.values(bookCountByGenreSorted) : []
-			}
-		],
-		chart: {
-			sparkline: {
-				enabled: false
-			},
-			type: 'bar',
-			width: '100%',
-			height: `${genreChartHeight}px`,
-			toolbar: {
-				show: false
-			}
-		},
-		fill: {
-			opacity: 1
-		},
-		plotOptions: {
-			bar: {
-				horizontal: true,
-				columnWidth: '100%',
-				borderRadiusApplication: 'end',
-				borderRadius: 3,
-				dataLabels: {
-					position: 'top'
-				}
-			}
-		},
-		legend: {
-			show: true,
-			position: 'bottom'
-		},
-		dataLabels: {
-			enabled: false
-		},
-		tooltip: {
-			shared: true,
-			intersect: false
-		},
-		xaxis: {
-			labels: {
-				show: true,
-				style: {
-					fontFamily: 'Inter, sans-serif',
-					cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
-				}
-			},
-			categories: bookCountByGenreSorted ? Object.keys(bookCountByGenreSorted) : [],
-			axisTicks: {
-				show: false
-			},
-			axisBorder: {
-				show: false
-			}
-		},
-		yaxis: {
-			labels: {
-				show: true,
-				style: {
-					fontFamily: 'Inter, sans-serif',
-					cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
-				}
-			}
-		},
-		grid: {
-			show: true,
-			strokeDashArray: 4,
-			padding: {
-				left: 2,
-				right: 2,
-				top: -20
-			}
-		}
-	};
+	const options: ApexOptions = $derived(
+		createBarOptions({
+			categories: topGenres.entries.map(([name]) => name),
+			data: topGenres.entries.map(([, count]) => count),
+			height: barChartHeight(topGenres.entries.length)
+		})
+	);
 </script>
 
 <Card class="p-4 md:p-6">
@@ -135,11 +58,11 @@
 				</div>
 			</Popover>
 			<dd class="text-3xl leading-none font-bold text-gray-900 dark:text-white">
-				{bookCountByGenre ? Object.keys(bookCountByGenre).length : 0}
+				{Object.keys(bookCountByGenre).length}
 			</dd>
-			{#if hiddenGenres > 0}
+			{#if topGenres.hidden > 0}
 				<dd class="pt-1 text-xs font-normal text-gray-500 dark:text-gray-400">
-					Showing top {topGenreEntries.length} of {totalGenres}
+					Showing top {topGenres.entries.length} of {topGenres.total}
 				</dd>
 			{/if}
 		</dl>

@@ -4,27 +4,29 @@
 	import { Card } from 'flowbite-svelte';
 	import type { Book } from '$lib/types';
 
-	export let books: Book[] = [];
+	let { books = [] }: { books: Book[] } = $props();
 
-	const bookCountByReadingStatus = books.reduce(
-		(acc, book) => {
-			const status = book.readingStatus;
-			if (status != null) {
-				acc[status] = (acc[status] || 0) + 1;
-			} else {
-				acc['unknown'] = (acc['unknown'] || 0) + 1;
-			}
+	const bookCountByReadingStatus = $derived(
+		books.reduce(
+			(acc, book) => {
+				const status = book.readingStatus;
+				if (status != null) {
+					acc[status] = (acc[status] || 0) + 1;
+				} else {
+					acc['unknown'] = (acc['unknown'] || 0) + 1;
+				}
 
-			return acc;
-		},
-		{} as Record<string, number>
+				return acc;
+			},
+			{} as Record<string, number>
+		)
 	);
 
-	const options: ApexOptions = {
+	const options: ApexOptions = $derived({
 		series: [
-			bookCountByReadingStatus['finished'],
-			bookCountByReadingStatus['in progress'],
-			bookCountByReadingStatus['unknown']
+			bookCountByReadingStatus['finished'] ?? 0,
+			bookCountByReadingStatus['in progress'] ?? 0,
+			bookCountByReadingStatus['unknown'] ?? 0
 		],
 		colors: ['#2E3844', '#5B717F', '#9DA3A3'],
 		chart: {
@@ -87,7 +89,7 @@
 				show: false
 			}
 		}
-	};
+	});
 </script>
 
 <Card class="p-4 md:p-6">
