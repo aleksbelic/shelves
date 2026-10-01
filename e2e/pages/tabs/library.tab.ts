@@ -27,7 +27,7 @@ export class LibraryTab {
 		return this.page
 			.locator('[data-testid="books-table"] tbody tr')
 			.first()
-			.locator('td:nth-child(2)')
+			.locator('td:nth-child(1)')
 			.innerText();
 	}
 

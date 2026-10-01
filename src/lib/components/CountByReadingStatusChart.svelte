@@ -6,6 +6,28 @@
 
 	let { books = [] }: { books: Book[] } = $props();
 
+	// Track Flowbite dark mode (`dark` class on <html>) so ApexCharts SVG
+	// colors follow the theme toggle. The Chart wrapper forwards derived
+	// option changes via chart.updateOptions.
+	let dark = $state(false);
+
+	$effect(() => {
+		if (typeof document === 'undefined') return;
+		const root = document.documentElement;
+		const sync = () => {
+			dark = root.classList.contains('dark');
+		};
+		sync();
+		const observer = new MutationObserver(sync);
+		observer.observe(root, { attributes: true, attributeFilter: ['class'] });
+		return () => observer.disconnect();
+	});
+
+	const textColor = $derived(dark ? '#E5E7EB' : '#111827');
+	const palette = $derived(
+		dark ? ['#E5E7EB', '#9CA3AF', '#6B7280'] : ['#2E3844', '#5B717F', '#9DA3A3']
+	);
+
 	const bookCountByReadingStatus = $derived(
 		books.reduce(
 			(acc, book) => {
@@ -28,11 +50,14 @@
 			bookCountByReadingStatus['in progress'] ?? 0,
 			bookCountByReadingStatus['unknown'] ?? 0
 		],
-		colors: ['#2E3844', '#5B717F', '#9DA3A3'],
+		colors: palette,
+		theme: { mode: dark ? 'dark' : 'light' },
 		chart: {
 			height: 320,
 			width: '100%',
-			type: 'donut'
+			type: 'donut',
+			background: 'transparent',
+			foreColor: textColor
 		},
 		stroke: {
 			colors: ['transparent']
@@ -45,18 +70,21 @@
 						name: {
 							show: true,
 							fontFamily: 'Inter, sans-serif',
-							offsetY: 20
+							offsetY: 20,
+							color: textColor
 						},
 						total: {
 							showAlways: true,
 							show: true,
 							label: 'Books in library',
-							fontFamily: 'Inter, sans-serif'
+							fontFamily: 'Inter, sans-serif',
+							color: textColor
 						},
 						value: {
 							show: true,
 							fontFamily: 'Inter, sans-serif',
-							offsetY: -20
+							offsetY: -20,
+							color: textColor
 						}
 					},
 					size: '80%'
@@ -74,7 +102,10 @@
 		},
 		legend: {
 			position: 'bottom',
-			fontFamily: 'Inter, sans-serif'
+			fontFamily: 'Inter, sans-serif',
+			labels: {
+				colors: textColor
+			}
 		},
 		xaxis: {
 			labels: {

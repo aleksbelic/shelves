@@ -48,6 +48,7 @@ export function createBarOptions({
 			type: 'bar',
 			width: '100%',
 			height: `${height}px`,
+			background: 'transparent',
 			toolbar: {
 				show: false
 			}

@@ -42,7 +42,6 @@
 		onInitError={() => (tableReady = true)}
 	>
 		<TableHead>
-			<TableHeadCell>#</TableHeadCell>
 			<TableHeadCell>Title</TableHeadCell>
 			<TableHeadCell>Author</TableHeadCell>
 			<TableHeadCell>Genre</TableHeadCell>
@@ -54,11 +53,10 @@
 			<TableHeadCell>Reading status</TableHeadCell>
 		</TableHead>
 		<TableBody>
-			{#each rows as book, index (book.id)}
+			{#each rows as book (book.id)}
 				<TableBodyRow
 					class="border-b bg-white last:border-b-0 odd:bg-white even:bg-gray-50 hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:odd:bg-gray-800 dark:even:bg-gray-700 dark:hover:bg-gray-600"
 				>
-					<TableBodyCell>{index + 1}</TableBodyCell>
 					<TableBodyCell><P weight="medium">{book.title}</P></TableBodyCell>
 					<TableBodyCell>{book.author.join(', ')}</TableBodyCell>
 					<TableBodyCell>{(book.genre ?? []).join(', ')}</TableBodyCell>
