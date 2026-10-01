@@ -15,3 +15,37 @@ Please check live demo @ https://shelves-three.vercel.app
 - Charts displaying counts by author, publisher, reading status, etc., using `@flowbite-svelte-plugins/chart`
 - Light/Dark mode toggle
 - Fully responsive layout
+
+## Supabase Database Backup
+
+Make sure you have `Docker` installed and running on your machine.
+
+Supabase CLI is required to backup the database. You can install it globally using npm:
+
+```bash
+npm i -g supabase
+```
+
+Login to your Supabase account:
+
+```bash
+supabase login
+```
+
+Link remote project:
+
+```bash
+supabase link --project-ref <PROJECT-REF>
+```
+
+Schema only backup:
+
+```bash
+supabase db dump --linked --schema public -f schema.sql
+```
+
+Data only backup:
+
+```bash
+supabase db dump --linked --data-only -f data.sql
+```
