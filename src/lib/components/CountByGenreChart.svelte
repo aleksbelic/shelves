@@ -2,9 +2,9 @@
 	import type { ApexOptions } from 'apexcharts';
 	import { Chart } from '@flowbite-svelte-plugins/chart';
 	import { Card, Popover } from 'flowbite-svelte';
-	import type { Book } from '$lib/types';
+	import type { Book } from '#lib/types/index.js';
 	import { InfoCircleSolid } from 'flowbite-svelte-icons';
-	import { barChartHeight, createBarOptions, topNSorted } from '$lib/utils/chartCounts';
+	import { barChartHeight, createBarOptions, topNSorted } from '#lib/utils/chartCounts.js';
 
 	let { books = [] }: { books: Book[] } = $props();
 

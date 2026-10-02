@@ -8,8 +8,8 @@
 		TableHead,
 		TableHeadCell
 	} from '@flowbite-svelte-plugins/datatable';
-	import type { Book } from '$lib/types';
-	import { isIsbn13Valid } from '$lib/utils/isbn13';
+	import type { Book } from '#lib/types/index.js';
+	import { isIsbn13Valid } from '#lib/utils/isbn13.js';
 	import { ExclamationCircleOutline, ExclamationCircleSolid } from 'flowbite-svelte-icons';
 
 	let { books = [] }: { books: Book[] } = $props();

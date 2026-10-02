@@ -1,7 +1,7 @@
 <script lang="ts">
 	import '../app.css';
-	import favicon from '$lib/assets/favicon.svg';
-	import MyNavbar from '$lib/components/MyNavbar.svelte';
+	import favicon from '#lib/assets/favicon.svg';
+	import MyNavbar from '#lib/components/MyNavbar.svelte';
 
 	let { children } = $props();
 </script>

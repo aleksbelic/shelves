@@ -2,7 +2,7 @@
 	import type { ApexOptions } from 'apexcharts';
 	import { Chart } from '@flowbite-svelte-plugins/chart';
 	import { Card } from 'flowbite-svelte';
-	import type { Book } from '$lib/types';
+	import type { Book } from '#lib/types/index.js';
 
 	let { books = [] }: { books: Book[] } = $props();
 

@@ -1,6 +1,6 @@
 import { error } from '@sveltejs/kit';
-import { supabase } from '$lib/supabaseClient';
-import { BOOK_COLUMNS, type Book, type BookRow } from '$lib/types';
+import { supabase } from '#lib/supabaseClient.js';
+import { BOOK_COLUMNS, type Book, type BookRow } from '#lib/types/index.js';
 
 export async function load() {
 	const { data, error: sbError } = await supabase

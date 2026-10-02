@@ -39,7 +39,7 @@ declare module 'simple-datatables' {
 
 	export interface SelectableDataRow {
 		selected?: boolean;
-		[key: string]: any;
+		[key: string]: unknown;
 	}
 }
 
