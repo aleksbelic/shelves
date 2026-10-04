@@ -13,6 +13,7 @@
 		<DarkMode
 			class="cursor-pointer border text-primary-500 dark:border-gray-600 dark:text-primary-600"
 			data-testid="theme-toggle-btn"
+			aria-label="Toggle theme"
 		/>
 	</div>
 </div>

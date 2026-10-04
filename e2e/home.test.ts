@@ -7,17 +7,18 @@ test('Home Page is displayed correctly', async ({ page }) => {
 
 	await homePage.navbar.shouldHaveLogoVisible();
 	await homePage.navbar.shouldHaveThemeToggleButtonVisible();
+	await homePage.navbar.expectDarkMode();
+	await expect(homePage.navbar.themeToggleButton).toHaveAttribute('aria-label', 'Toggle theme');
 
-	// tabs
 	await expect(homePage.libraryTabBtn).toBeVisible();
 	await expect(homePage.statsTabBtn).toBeVisible();
 
-	// search input
+	await homePage.expectLibraryDisplayed();
+
 	await expect(homePage.library.searchInput).toBeVisible();
 	await expect(homePage.library.searchInput).toHaveValue('');
 	await expect(homePage.library.searchInput).toHaveAttribute('placeholder', 'Search...');
 
-	// entries per page
 	await expect(homePage.library.perPageSelect).toBeVisible();
 	await expect(homePage.library.perPageSelect).toHaveValue('10');
 });

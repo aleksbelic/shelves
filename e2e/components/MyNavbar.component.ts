@@ -1,4 +1,4 @@
-import { Page, Locator } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
 
 export default class MyNavBar {
 	readonly page: Page;
@@ -17,5 +17,21 @@ export default class MyNavBar {
 
 	async shouldHaveThemeToggleButtonVisible() {
 		return this.themeToggleButton.isVisible();
+	}
+
+	async toggleTheme() {
+		await this.themeToggleButton.click();
+	}
+
+	async expectDarkMode() {
+		await expect(this.page.locator('html'), 'html should have "dark" class').toHaveClass(
+			/.*\bdark\b.*/
+		);
+	}
+
+	async expectLightMode() {
+		await expect(this.page.locator('html'), 'html should NOT have "dark" class').not.toHaveClass(
+			/.*\bdark\b.*/
+		);
 	}
 }

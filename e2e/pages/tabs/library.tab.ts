@@ -1,4 +1,4 @@
-import { Page, Locator } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
 
 export class LibraryTab {
 	readonly page: Page;
@@ -17,6 +17,15 @@ export class LibraryTab {
 		await this.bookTable.waitFor({ state: 'visible', timeout });
 	}
 
+	async expectVisible() {
+		await expect(this.searchInput).toBeVisible();
+		await expect(this.bookTable).toBeVisible();
+	}
+
+	async expectHidden() {
+		await expect(this.searchInput).toHaveCount(0);
+	}
+
 	async search(query: string) {
 		await this.searchInput.fill(query);
 		await this.searchInput.press('Enter');
@@ -31,8 +40,8 @@ export class LibraryTab {
 			.innerText();
 	}
 
-	async setPerPage(count: string) {
-		await this.perPageSelect.selectOption(count);
+	async setPerPage(count: number) {
+		await this.perPageSelect.selectOption(count.toString());
 		await this.page.waitForTimeout(300);
 	}
 }

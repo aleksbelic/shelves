@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { LibraryTab } from './tabs/library.tab';
 import { StatsTab } from './tabs/stats.tab';
 import MyNavbar from '../components/MyNavbar.component';
@@ -16,8 +16,8 @@ export class HomePage {
 		this.navbar = new MyNavbar(page);
 		this.library = new LibraryTab(page);
 		this.stats = new StatsTab(page);
-		this.libraryTabBtn = page.getByTestId('library-tab-btn');
-		this.statsTabBtn = page.getByTestId('stats-tab-btn');
+		this.libraryTabBtn = page.getByTestId('library-tab-btn').getByRole('tab');
+		this.statsTabBtn = page.getByTestId('stats-tab-btn').getByRole('tab');
 	}
 
 	async goto() {
@@ -33,5 +33,19 @@ export class HomePage {
 	async openStats() {
 		await this.statsTabBtn.click();
 		await this.stats.waitForCharts();
+	}
+
+	async expectLibraryDisplayed() {
+		await expect(this.libraryTabBtn).toHaveAttribute('aria-selected', 'true');
+		await expect(this.statsTabBtn).toHaveAttribute('aria-selected', 'false');
+		await this.library.expectVisible();
+		await this.stats.expectHidden();
+	}
+
+	async expectStatsDisplayed() {
+		await expect(this.statsTabBtn).toHaveAttribute('aria-selected', 'true');
+		await expect(this.libraryTabBtn).toHaveAttribute('aria-selected', 'false');
+		await this.stats.expectVisible();
+		await this.library.expectHidden();
 	}
 }

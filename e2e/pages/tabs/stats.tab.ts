@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 
 export class StatsTab {
 	readonly page: Page;
@@ -7,11 +7,22 @@ export class StatsTab {
 		this.page = page;
 	}
 
+	readingStatusHeading() {
+		return this.page.getByRole('heading', { name: 'Reading status' });
+	}
+
 	async waitForCharts(timeout = 2000) {
-		// Look for chart headings / cards; prefer data-testid like data-testid="chart-reading-status"
-		await this.page.getByText('Reading status').waitFor({ state: 'visible', timeout });
+		await this.readingStatusHeading().waitFor({ state: 'visible', timeout });
 		await this.page.getByText('Authors').waitFor({ state: 'visible', timeout });
 		await this.page.getByText('Publishers').waitFor({ state: 'visible', timeout });
+	}
+
+	async expectVisible() {
+		await expect(this.readingStatusHeading()).toBeVisible();
+	}
+
+	async expectHidden() {
+		await expect(this.readingStatusHeading()).toHaveCount(0);
 	}
 
 	async isChartVisible(title: string) {
