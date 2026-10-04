@@ -25,7 +25,11 @@ export class StatsTab {
 		await expect(this.readingStatusHeading()).toHaveCount(0);
 	}
 
-	async isChartVisible(title: string) {
-		return this.page.getByText(title).isVisible();
+	chart(title: string) {
+		return this.page.getByText(title);
+	}
+
+	async expectChartVisible(title: string) {
+		await expect(this.chart(title)).toBeVisible();
 	}
 }

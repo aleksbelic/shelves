@@ -8,9 +8,13 @@ export class LibraryTab {
 
 	constructor(page: Page) {
 		this.page = page;
-		this.searchInput = page.locator('.datatable-input[name="search"]');
+		this.searchInput = page.getByRole('searchbox', { name: 'Search within table' });
 		this.bookTable = page.getByTestId('books-table');
-		this.perPageSelect = page.locator('.datatable-selector[name="per-page"]');
+		this.perPageSelect = page.getByRole('combobox', { name: 'entries per page' });
+	}
+
+	rows() {
+		return this.page.locator('[data-testid="books-table"] tbody tr');
 	}
 
 	async waitForLoad(timeout = 5000) {
@@ -29,19 +33,20 @@ export class LibraryTab {
 	async search(query: string) {
 		await this.searchInput.fill(query);
 		await this.searchInput.press('Enter');
-		await this.page.waitForTimeout(300);
+		await expect(this.searchInput).toHaveValue(query);
 	}
 
 	async firstRowTitle(): Promise<string> {
-		return this.page
-			.locator('[data-testid="books-table"] tbody tr')
-			.first()
-			.locator('td:nth-child(1)')
-			.innerText();
+		return this.rows().first().locator('td:nth-child(1)').innerText();
 	}
 
 	async setPerPage(count: number) {
 		await this.perPageSelect.selectOption(count.toString());
-		await this.page.waitForTimeout(300);
+		await expect(this.perPageSelect).toHaveValue(count.toString());
+		await expect
+			.poll(async () => await this.rows().filter({ visible: true }).count(), {
+				timeout: 5000
+			})
+			.toBeLessThanOrEqual(count);
 	}
 }

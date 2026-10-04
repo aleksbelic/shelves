@@ -7,16 +7,16 @@ export default class MyNavBar {
 
 	constructor(page: Page) {
 		this.page = page;
-		this.logo = page.getByTestId('library-tab-btn');
+		this.logo = page.getByTestId('shelves-logo');
 		this.themeToggleButton = page.getByTestId('theme-toggle-btn');
 	}
 
 	async shouldHaveLogoVisible() {
-		return this.logo.isVisible();
+		await expect(this.logo).toBeVisible();
 	}
 
 	async shouldHaveThemeToggleButtonVisible() {
-		return this.themeToggleButton.isVisible();
+		await expect(this.themeToggleButton).toBeVisible();
 	}
 
 	async toggleTheme() {
